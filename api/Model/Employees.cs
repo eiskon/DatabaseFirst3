@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace api.Model
 {
-    public partial class Employees
+    public partial class Employees : IdentityUser<int>
     {
         public Employees()
         {

@@ -6,64 +6,86 @@ using System.Threading.Tasks;
 using api.Data;
 using api.Dtos;
 using api.Model;
-using Microsoft.AspNetCore.Mvc; 
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 
 namespace api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AllowAnonymous]
     public class AuthController : ControllerBase
     {
-        private readonly IAuthRepository _repo;
         private readonly IConfiguration _config;
         private readonly IMapper _mapper;
-        public AuthController(IAuthRepository repo, IConfiguration config, IMapper mapper)
+        private readonly SignInManager<User> _signInManager;
+        private readonly UserManager<User> _userManager;
+        public AuthController(IConfiguration config, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager)
         {
+            _userManager = userManager;
+            _signInManager = signInManager;
             _config = config;
-            _repo = repo;
             _mapper = mapper;
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(EmployeeForRegisterDto employeeForRegisterDto)
+        public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
-            if (employeeForRegisterDto is null)
+            var userToCreate = _mapper.Map<User>(userForRegisterDto);
+
+            var result = await _userManager.CreateAsync(userToCreate, userForRegisterDto.Password);
+
+            var userToReturn = _mapper.Map<UserForDetailedDto>(userToCreate);
+
+            if (result.Succeeded)
             {
-                throw new System.ArgumentNullException(nameof(employeeForRegisterDto));
+                return CreatedAtRoute("GetUser", new { controller = "Users", id = userToCreate.Id }, userToReturn);
             }
-            // validate request
 
-            employeeForRegisterDto.LastName = employeeForRegisterDto.LastName;
-            employeeForRegisterDto.FirstName = employeeForRegisterDto.FirstName;
-
-            if (await _repo.EmployeExists(employeeForRegisterDto.LastName))
-                return BadRequest("Employename already existst");
-
-            var employeeToCreate = _mapper.Map<Employees>(employeeForRegisterDto);
-
-            var createdEmployee = await _repo.Register(employeeToCreate, employeeForRegisterDto.Password);
-
-            var employeeToReturn = _mapper.Map<EmployeeForDetailedDto>(createdEmployee);
-
-            return CreatedAtRoute("GetEmployee", new {controller = "Employees", id = createdEmployee.EmployeeId}, employeeToReturn);
+            return BadRequest(result.Errors);
+            
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(EmployeeForLoginDto employeeForLoginDto)
+        public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
-            var employeeFromRepo = await _repo.Login(employeeForLoginDto.LastName, employeeForLoginDto.Password);
+            var user = await _userManager.FindByNameAsync(userForLoginDto.UserName);
 
-            if (employeeFromRepo == null)
-                return Unauthorized();
+            var result = await _signInManager.CheckPasswordSignInAsync(user, userForLoginDto.Password, false);
 
-            var claims = new[]
+            if (result.Succeeded)
+        	{
+                var appUser = _mapper.Map<UserForLoginDto>(user);
+
+                return Ok(new
+                {
+                    token = GenerateJwtTocken(user).Result,
+                    user = appUser
+                });
+            }
+
+            return Unauthorized();
+        }
+
+        public async Task<string> GenerateJwtTocken(User user)
+        {
+            var claims = new List<Claim>
             {
-                    new Claim(ClaimTypes.NameIdentifier, employeeFromRepo.EmployeeId.ToString()),
-                    new Claim(ClaimTypes.Name, employeeFromRepo.LastName)
-                };
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.UserName)
+            };
+
+            var roles = await _userManager.GetRolesAsync(user);
+
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
 
             var key = new SymmetricSecurityKey(Encoding.UTF8
                 .GetBytes(_config.GetSection("AppSettings:Token").Value));
@@ -81,13 +103,8 @@ namespace api.Controllers
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
-            var employeeToReturn = _mapper.Map<EmployeeForListDto>(employeeFromRepo);
+            return tokenHandler.WriteToken(token);
 
-            return Ok(new
-            {
-                token = tokenHandler.WriteToken(token),
-                user = employeeToReturn
-            });
         }
 
     }

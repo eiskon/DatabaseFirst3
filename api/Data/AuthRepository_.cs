@@ -11,9 +11,9 @@ namespace api.Data
         {
             this._context = context;
         }
-        public async Task<bool> EmployeExists(string employename)
+        public async Task<bool> EmployeeExists(string username)
         {
-            if (await this._context.Employees.AnyAsync(x => x.LastName == employename))
+            if (await this._context.Employees.AnyAsync(x => x.LastName == username))
                 return true;
 
             return false;
@@ -49,8 +49,8 @@ namespace api.Data
             byte[] passwordHash, passwordSalt;
             CreatePasswordHash(password, out passwordHash, out passwordSalt);
 
-            employe.PasswordHash = passwordHash;
-            employe.PasswordSalt = passwordSalt;
+            // employe.PasswordHash = passwordHash;
+            // employe.PasswordSalt = passwordSalt;
 
             await _context.Employees.AddAsync(employe);
             await _context.SaveChangesAsync();

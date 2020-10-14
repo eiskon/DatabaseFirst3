@@ -1,0 +1,72 @@
+[
+    {
+      "Username": "Davolio",
+      "Password": "password",
+      "EmployeeId": 1
+    },
+    {
+      "Username": "Fuller",
+      "Password": "password",
+      "EmployeeId": 2
+    },
+    {
+      "Username": "Leverling",
+      "Password": "password",
+      "EmployeeId": 3
+    },
+    {
+      "Username": "Peacock",
+      "Password": "password",
+      "EmployeeId": 4
+    },
+    {
+      "Username": "Buchanan",
+      "Password": "password",
+      "EmployeeId": 5
+    },
+    {
+      "Username": "Suyama",
+      "Password": "password",
+      "EmployeeId": 6
+    },
+    {
+      "Username": "King",
+      "Password": "password",
+      "EmployeeId": 7
+    },
+    {
+      "Username": "Callahan",
+      "Password": "password",
+      "EmployeeId": 8
+    },
+    {
+      "Username": "Dodsworth",
+      "Password": "password",
+      "EmployeeId": 9
+    },
+    {
+      "Username": "Müller",
+      "Password": "password",
+      "EmployeeId": 27
+    },
+    {
+      "Username": "Koller",
+      "Password": "password",
+      "EmployeeId": 29
+    },
+    {
+      "Username": "Schneider",
+      "Password": "password",
+      "EmployeeId": 32
+    },
+    {
+      "Username": "Landau",
+      "Password": "password",
+      "EmployeeId": 33
+    },
+    {
+      "Username": "Morse",
+      "Password": "password",
+      "EmployeeId": 34
+    }
+  ]

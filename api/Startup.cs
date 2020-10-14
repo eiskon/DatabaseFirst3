@@ -15,6 +15,9 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using api.Helpers;
 using AutoMapper;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace api
 {
@@ -30,18 +33,20 @@ namespace api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-        
-        
-            services.AddDbContext<NorthwindContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddControllers().AddNewtonsoftJson(options =>
-                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-            services.AddCors();
-            services.AddAutoMapper(typeof(EmployeesRepository).Assembly);
-            services.AddAutoMapper(typeof(OrderRepository).Assembly);
-            services.AddScoped<IAuthRepository, AuthRepository>();
-            services.AddScoped<IEmployeesRepository, EmployeesRepository>();
-            services.AddScoped<IOrderRepository, OrderRepository>();
-            services.AddScoped<IProductRepository, ProductRepository>();
+            IdentityBuilder builder = services.AddIdentityCore<User>(opt => 
+            {
+                opt.Password.RequireDigit = false;
+                opt.Password.RequiredLength = 4;
+                opt.Password.RequireNonAlphanumeric = false;
+                opt.Password.RequireUppercase = false;
+            });
+
+            builder = new IdentityBuilder(builder.UserType, typeof(Role), builder.Services);
+            builder.AddEntityFrameworkStores<NorthwindContext>();
+            builder.AddRoleValidator<RoleValidator<Role>>();
+            builder.AddRoleManager<RoleManager<Role>>();
+            builder.AddSignInManager<SignInManager<User>>();
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
@@ -54,6 +59,27 @@ namespace api
                     ValidateAudience = false
                 };
             });
+
+            services.AddMvc(options => 
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                        .RequireAuthenticatedUser()
+                        .Build();
+                
+                options.Filters.Add(new AuthorizeFilter(policy));
+            });
+
+            services.AddDbContext<NorthwindContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            services.AddCors();
+            services.AddAutoMapper(typeof(EmployeesRepository).Assembly);
+            services.AddAutoMapper(typeof(OrderRepository).Assembly);
+            services.AddScoped<IEmployeesRepository, EmployeesRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            
             // services.AddScoped<LogEmployeeUpdate>();
         }
 

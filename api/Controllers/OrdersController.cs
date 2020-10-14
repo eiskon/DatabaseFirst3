@@ -12,7 +12,7 @@ using api.Filters;
 
 namespace api.Controllers
 {
-    [Authorize]
+    // [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class OrdersController : ControllerBase

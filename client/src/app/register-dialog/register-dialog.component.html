@@ -5,25 +5,27 @@
       <h3 fxLayoutAlign="center center">Sing Up</h3>
       <mat-dialog-content fxLayout="column">
         <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px" fxLayoutGap.lt-md="0px">
-          <mat-form-field appearance="none" fxFlex>
-            <mat-select formControlName="titleOfCourtesy" placeholder="Title of courtesy">
+           <!-- <mat-form-field appearance="none" fxFlex>
+           <mat-select formControlName="titleOfCourtesy" placeholder="Title of courtesy">
               <ng-container *ngFor="let toc of selectedTitleOfCourtesy">
                 <mat-option [value]="toc">{{toc}}</mat-option>
               </ng-container>
             </mat-select>
             <mat-error *ngIf="registerForm.get('titleOfCourtesy').errors">Title of courtesy is required</mat-error>
+          </mat-form-field> -->
+
+           <mat-form-field appearance="none" fxFlex>
+            <input matInput type="text" formControlName="userName" placeholder="Username" />
+            <mat-error *ngIf="registerForm.get('userName').errors">Username is required</mat-error>
           </mat-form-field>
-          <mat-form-field appearance="none" fxFlex>
-            <input matInput type="text" formControlName="lastname" placeholder="Lastname" />
-            <mat-error *ngIf="registerForm.get('lastname').errors">Lastname is required</mat-error>
-          </mat-form-field>
-          <mat-form-field appearance="none" fxFlex>
+
+          <!-- <mat-form-field appearance="none" fxFlex>
             <input matInput type="text" formControlName="firstname" placeholder="Firstname" />
             <mat-error *ngIf="registerForm.get('firstname').errors">Firstname is required</mat-error>
-          </mat-form-field>
+          </mat-form-field> -->
         </div>
 
-        <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px" fxLayoutGap.lt-md="0px">
+        <!-- <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px" fxLayoutGap.lt-md="0px">
           <mat-form-field appearance="none" fxFlex>
             <input matInput [matDatepicker]="picker" formControlName="birthDate" placeholder="Birthdate" />
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -38,9 +40,9 @@
             <input matInput type="text" formControlName="homePhone" placeholder="Home phone" />
             <mat-error *ngIf="registerForm.get('homePhone').errors">Home phone is required</mat-error>
           </mat-form-field>
-        </div>
+        </div> -->
 
-        <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px" fxLayoutGap.lt-md="0px">
+        <!-- <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px" fxLayoutGap.lt-md="0px">
           <mat-form-field appearance="none" fxFlex>
             <input matInput type="text" formControlName="postalCode" placeholder="Postalcode" />
             <mat-error *ngIf="registerForm.get('postalCode').errors">Postalcode is required</mat-error>
@@ -57,7 +59,7 @@
             <input matInput type="text" formControlName="region" placeholder="Region" />
             <mat-error *ngIf="registerForm.get('region').errors">Region is required</mat-error>
           </mat-form-field>
-        </div>
+        </div>  -->
 
         <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px" fxLayoutGap.lt-md="0px">
           <mat-form-field appearance="none" fxFlex>

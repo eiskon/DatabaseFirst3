@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using api.Model;
 
 namespace api.Migrations
 {
     [DbContext(typeof(NorthwindContext))]
-    partial class NorthwindContextModelSnapshot : ModelSnapshot
+    [Migration("20201006152511_IdentityInitial")]
+    partial class IdentityInitial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -264,9 +266,6 @@ namespace api.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(60)")
                         .HasMaxLength(60);
@@ -278,21 +277,12 @@ namespace api.Migrations
                         .HasColumnType("nvarchar(15)")
                         .HasMaxLength(15);
 
-                    b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Country")
                         .HasColumnType("nvarchar(15)")
                         .HasMaxLength(15);
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Extension")
                         .HasColumnType("nvarchar(4)")
@@ -310,9 +300,6 @@ namespace api.Migrations
                         .HasColumnType("nvarchar(24)")
                         .HasMaxLength(24);
 
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(20)")
@@ -320,18 +307,6 @@ namespace api.Migrations
 
                     b.Property<DateTime>("LastUpdate")
                         .HasColumnType("datetime2");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Notes")
                         .HasColumnType("ntext");
@@ -341,12 +316,6 @@ namespace api.Migrations
 
                     b.Property<byte[]>("PasswordSalt")
                         .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
 
                     b.Property<byte[]>("Photo")
                         .HasColumnType("image");
@@ -366,9 +335,6 @@ namespace api.Migrations
                     b.Property<int?>("ReportsTo")
                         .HasColumnType("int");
 
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(30)")
                         .HasMaxLength(30);
@@ -376,12 +342,6 @@ namespace api.Migrations
                     b.Property<string>("TitleOfCourtesy")
                         .HasColumnType("nvarchar(25)")
                         .HasMaxLength(25);
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("EmployeeId");
 

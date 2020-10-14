@@ -33,6 +33,7 @@ export class LoginDialogComponent implements OnInit {
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');  // ?
     this.alertify.message('logged out');
     this.router.navigate(['/home']);
   }

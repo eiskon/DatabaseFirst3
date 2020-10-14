@@ -14,7 +14,7 @@ using api.Filters;
 namespace api.Controllers
 {
     // [ServiceFilter(typeof(LogEmployeeUpdate))]
-    [Authorize]
+    // [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class EmployeesController : ControllerBase
