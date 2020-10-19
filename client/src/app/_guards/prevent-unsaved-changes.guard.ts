@@ -9,7 +9,7 @@ import { EmployeeEditDialogComponent } from '../employee/employee-edit-dialog/em
   export class PreventUnsavedChanges implements CanDeactivate<EmployeeEditDialogComponent> {
     canDeactivate(component: EmployeeEditDialogComponent) {
         if (component.editForm.dirty) {
-            return confirm('Are you sure you want to continue? Any unsaved changes wilbe lost');
+            return confirm('Are you sure you want to continue? Any unsaved changes will be lost');
         }
         return true;
     }

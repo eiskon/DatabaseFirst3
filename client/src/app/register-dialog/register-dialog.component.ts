@@ -15,7 +15,7 @@ import { User } from '../_models/user';
 })
 export class RegisterDialogComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter();
-  employee: Employe;
+  // employee: Employe;
   user: User;
   registerForm: FormGroup;
   selectedTitleOfCourtesy = ['Ms.', 'Mr.', 'Mrs.'];

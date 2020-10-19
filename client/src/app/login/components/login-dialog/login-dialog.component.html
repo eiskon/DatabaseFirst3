@@ -1,62 +1,27 @@
 <div fxLayoutAlign="center center">
-<form
-  fxLayout="column"
-  *ngIf="!loggedIn()"
-  #loginForm="ngForm"
-  (ngSubmit)="login()"
-  class="form-container"
->
-  <h2 fxLayoutAlign="center center">Log In</h2>
-  <mat-dialog-content fxLayout="column">
-    <div
-      class="input-row"
-      fxLayout="row"
-      fxLayout.lt-md="column"
-      fxLayoutGap="20px"
-      fxLayoutGap.lt-md="0px"
-    >
-      <mat-form-field appearance="none" fxFlex>
-        <mat-label>Username</mat-label>
-        <input
-          matInput
-          type="text"
-          name="Username"
-          required
-          [(ngModel)]="model.username"
-        />
-      </mat-form-field>
-    </div>
-    <div
-      class="input-row"
-      fxLayout="column"
-      fxLayout.lt-md="column"
-      fxLayoutGap="20px"
-      fxLayoutGap.lt-md="0px"
-    >
-      <mat-form-field appearance="none" fxFlex>
-        <mat-label>Password</mat-label>
-        <input
-          matInput
-          type="password"
-          name="password"
-          required
-          [(ngModel)]="model.password"
-        />
-      </mat-form-field>
-    </div>
-  </mat-dialog-content>
+  <form fxLayout="column" *ngIf="!loggedIn()" #loginForm="ngForm" (ngSubmit)="login()" class="form-container">
+    <h2 fxLayoutAlign="center center">Log In</h2>
+    <mat-dialog-content fxLayout="column">
+      <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+        <mat-form-field appearance="none" fxFlex>
+          <mat-label>Username</mat-label>
+          <input matInput type="text" name="userName" required [(ngModel)]="model.username" />
+        </mat-form-field>
+      </div>
+      <div class="input-row" fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+        <mat-form-field appearance="none" fxFlex>
+          <mat-label>Password</mat-label>
+          <input matInput type="password" name="password" required [(ngModel)]="model.password" />
+        </mat-form-field>
+      </div>
+    </mat-dialog-content>
 
-  <mat-dialog-actions
-    fxLayoutAlign="center center"
-    fxLayout="row"
-    fxLayout.lt-md="column"
-    fxLayoutGap="20px"
-    fxLayoutGap.lt-md="0px"
-  >
-    <button mat-button [disabled]="!loginForm.valid" class="mat-raised-button" type="submit">   Ok   </button>
-    <!-- <button mat-button class="mat-raised-button mat-primary" (click)="cancel()">
+    <mat-dialog-actions fxLayoutAlign="center center" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px"
+      fxLayoutGap.lt-md="0px">
+      <button mat-button [disabled]="!loginForm.valid" class="mat-raised-button" type="submit"> Ok </button>
+      <!-- <button mat-button class="mat-raised-button mat-primary" (click)="cancel()">
       Cancel
     </button> -->
-  </mat-dialog-actions>
-</form>
+    </mat-dialog-actions>
+  </form>
 </div>

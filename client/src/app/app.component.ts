@@ -3,6 +3,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthService } from './_services/auth.service';
 import { Employe } from './_models/employe';
 import { User } from './_models/user';
+import { HideIfUnauthorizedDirective } from './_core/derectives/hideIfUnauthorized.directive';
 
 @Component({
   selector: 'app-root',

@@ -21,6 +21,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './_services/auth.service';
 import { OrdersService } from './_services/orders.service';
 import { CoreModule } from './_core/core.module';
+import { AdminModule } from './admin/admin.module';
 import { OrdersModule } from './orders/orders.module';
 import { HomeComponent } from './home/home.component';
 import { RegisterDialogComponent } from './register-dialog/register-dialog.component';
@@ -32,6 +33,7 @@ import { EmployeeListResolver } from './_resolvers/employee-list.resolver';
 import { EmployeeEditDialogComponent } from './employee/employee-edit-dialog/employee-edit-dialog.component';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { OrderListResolver } from './_resolvers/order-list.resolver';
+import { HideIfUnauthorizedDirective } from './_core/derectives/hideIfUnauthorized.directive';
 
 export function getToken() {
    return localStorage.getItem('token');
@@ -42,11 +44,13 @@ export function getToken() {
       AppComponent,
       NavComponent,
       HomeComponent,
-      RegisterDialogComponent
+      RegisterDialogComponent,
+      HideIfUnauthorizedDirective
    ],
    imports: [
       BrowserModule,
       CoreModule,
+      AdminModule,
       OrdersModule,
       EmployeesModule,
       LoginModule,

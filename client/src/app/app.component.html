@@ -19,6 +19,8 @@
           (click)="sidenav.toggle()"><mat-icon>view_list</mat-icon> <span class="nav-caption">Orders</span></a>
       <a *ngIf="loggedIn()" mat-list-item routerLinkActive="active" [routerLink]="['/employee']"
           (click)="sidenav.toggle()"><mat-icon>account_box</mat-icon> <span class="nav-caption">Employees</span></a>
+      <a *ngIf="loggedIn()" hideIfUnauthorized="Admin" mat-list-item routerLinkActive="active" [routerLink]="['/admin']"
+          (click)="sidenav.toggle()"><mat-icon>admin_panel_settings</mat-icon> <span class="nav-caption">Admin</span></a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

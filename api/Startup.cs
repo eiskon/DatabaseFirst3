@@ -60,6 +60,14 @@ namespace api
                 };
             });
 
+            services.AddAuthorization(options => 
+            {
+                options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
+                options.AddPolicy("EditOrdersRole", policy => policy.RequireRole("Admin", "Order"));
+                options.AddPolicy("HumanResourceRole", policy => policy.RequireRole("Admin", "HumanResource"));
+                options.AddPolicy("EmployeeRoleOnly", policy => policy.RequireRole("Employee"));
+            });
+
             services.AddMvc(options => 
             {
                 var policy = new AuthorizationPolicyBuilder()
