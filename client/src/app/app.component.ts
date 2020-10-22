@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthService } from './_services/auth.service';
-import { Employe } from './_models/employe';
+// import { Employe } from './_models/employe';
 import { User } from './_models/user';
-import { HideIfUnauthorizedDirective } from './_core/derectives/hideIfUnauthorized.directive';
+// import { HasRoleDirective } from './_core/_derectives/hasRole.directive';
 
 @Component({
   selector: 'app-root',

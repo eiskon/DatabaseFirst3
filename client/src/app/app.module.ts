@@ -19,6 +19,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './_services/auth.service';
+import { AdminService } from './_services/admin.service';
 import { OrdersService } from './_services/orders.service';
 import { CoreModule } from './_core/core.module';
 import { AdminModule } from './admin/admin.module';
@@ -33,7 +34,7 @@ import { EmployeeListResolver } from './_resolvers/employee-list.resolver';
 import { EmployeeEditDialogComponent } from './employee/employee-edit-dialog/employee-edit-dialog.component';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { OrderListResolver } from './_resolvers/order-list.resolver';
-import { HideIfUnauthorizedDirective } from './_core/derectives/hideIfUnauthorized.directive';
+import { HasRoleDirective } from './_core/_derectives/hasRole.directive';
 
 export function getToken() {
    return localStorage.getItem('token');
@@ -45,7 +46,7 @@ export function getToken() {
       NavComponent,
       HomeComponent,
       RegisterDialogComponent,
-      HideIfUnauthorizedDirective
+      HasRoleDirective
    ],
    imports: [
       BrowserModule,
@@ -92,6 +93,7 @@ export function getToken() {
       EmployeeListResolver,
       OrderListResolver,
       PreventUnsavedChanges,
+      AdminService,
       ErrorInterceptorProvider
    ],
    bootstrap: [
