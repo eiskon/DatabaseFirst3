@@ -8,7 +8,7 @@ import { EmployeeEditDialogComponent } from '../employee/employee-edit-dialog/em
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.css']
+  styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit {
 

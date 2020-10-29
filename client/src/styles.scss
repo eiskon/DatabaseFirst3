@@ -1,0 +1,40 @@
+@use '../node_modules/alertifyjs/build/css/alertify.min.css';
+@use '../node_modules/alertifyjs/build/css/themes/semantic.min.css';
+
+@use './styles/body';
+
+@use '@material/theme' with (
+  $primary: #6200ee,
+  $secondary: #faab1a,
+  $background: #fff,
+);
+
+// MDC Typography
+@use '@material/typography/mdc-typography';
+
+// MDC Button
+@use './styles/button';
+
+// MDC Form Field
+@use './styles/form-field';
+
+// MDC Checkbox
+@use './styles/checkbox';
+
+// MDC Tabbar
+@use './styles/tab-bar';
+
+// MDC FAB
+@use './styles/fab';
+
+// MDC Drawer
+@use './styles/drawer';
+
+// MDC List
+@use './styles/list';
+
+// MDC Menu
+@use './styles/menu';
+
+// Angular MDC
+@use '@angular-mdc/theme/material';

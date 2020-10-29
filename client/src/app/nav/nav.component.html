@@ -1,14 +1,12 @@
 <div *ngIf="loggedIn()">
   <mat-form-field appearance="none">
-    <mat-label
-      >Welcome {{ authService.decodeToken?.unique_name | titlecase }}</mat-label
-    >
+    <mat-label>Welcome {{ authService.decodeToken?.unique_name | titlecase }}</mat-label>
     <mat-select>
-      <mat-option (click)="openDialogEmployeeEdit(authService.decodeToken.nameid)">
+      <!-- <mat-option (click)="openDialogEmployeeEdit(authService.decodeToken.nameid)">
         <i class="material-icons">account_circle</i>
         Edit Profile
       </mat-option>
-      <mat-divider></mat-divider>
+      <mat-divider></mat-divider> -->
       <mat-option (click)="logout()">
         <i class="material-icons">logout</i>
         Logout
@@ -16,14 +14,28 @@
     </mat-select>
   </mat-form-field>
 </div>
-<div *ngIf="!loggedIn()">
+<!-- <div *ngIf="!loggedIn()">
   <button mat-icon-button matTooltip="Sign up" (click)="navToRegister()">
     <mat-icon>how_to_reg</mat-icon>
   </button>
-  <button mat-icon-button matTooltip="Log in"  (click)="navToLogin()">
+  <button mat-icon-button matTooltip="Log in" (click)="navToLogin()">
     <mat-icon>login</mat-icon>
   </button>
-  <!-- <button mat-icon-button matTooltip="Admin" (click)="navToAdmin()">
-    <mat-icon>admin_panel_settings</mat-icon>
-  </button> -->
+</div> -->
+
+<div *ngIf="!loggedIn()">
+  <mdc-icon mdc-fab mini (click)="profileMenu.open = !profileMenu.open">more_vert</mdc-icon>
+  <div mdcMenuSurfaceAnchor #menuAnchor>
+    <mdc-menu #profileMenu [anchorElement]="menuAnchor">
+      <mdc-list>
+        <mdc-list-item (click)="navToRegister()">
+          <mdc-icon>how_to_reg</mdc-icon>Register
+        </mdc-list-item>
+        <mdc-list-divider></mdc-list-divider>
+        <mdc-list-item (click)="navToLogin()">
+          <mdc-icon>login</mdc-icon>Log in
+        </mdc-list-item>
+      </mdc-list>
+    </mdc-menu>
+  </div>
 </div>

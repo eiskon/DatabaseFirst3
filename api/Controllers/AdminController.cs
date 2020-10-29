@@ -44,6 +44,21 @@ namespace api.Controllers
         }
 
         [Authorize(Policy = "RequireAdminRole")]
+        [HttpGet("availableRoles")]
+        public async Task<IActionResult> GetAvailableRoles()
+        {
+            var rolesList = await _context.Roles
+                .OrderBy(x => x.Name)
+                .Select(role => new
+                {
+                    name = role.Name,
+                    value = role.Name
+                }).ToListAsync();
+
+            return Ok(rolesList);
+        }
+
+        [Authorize(Policy = "RequireAdminRole")]
         [HttpPost("editRoles/{userName}")]
         public async Task<IActionResult> EditRoles(string userName, RoleEditDto roleEditDto)
         {

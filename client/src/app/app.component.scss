@@ -1,0 +1,49 @@
+@use '@material/top-app-bar/_index' as top-app-bar;
+@use '@material/tab/_index' as tab;
+@use '@material/tab-indicator/_index' as tab-indicator;
+@use '@material/ripple/_index' as ripple;
+@use '@material/theme/color-palette' as material-color;
+@use '@material/theme';
+
+.app-menu {
+    margin-right: 20px;
+}
+
+mat-sidenav {
+    width: 210px;
+    padding: 15px;
+    background-color: white;
+}
+mat-toolbar mat-toolbar-row {
+    height: auto;
+}
+.mat-drawer { 
+    color:#fff
+}
+.main-content {
+    padding:20px;
+}
+.toolbar-spacer {
+    flex: 1 1 auto;
+}
+a mat-list-item {
+    color: whitesmoke;
+}
+a {
+    text-decoration: none;
+    color: white;
+}
+a:hover, a:active{
+    color: lightgray;
+}
+.nav-caption{
+    display: inline-block;
+    padding-left: 6px;
+}
+
+.drawer-app-content {
+    border: 1px solid rgba(0, 0, 0, .15);
+    min-height: 16.7rem;
+    overflow: hidden;
+    position: relative;
+  }

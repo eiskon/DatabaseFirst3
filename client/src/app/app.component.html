@@ -1,9 +1,12 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <button mat-icon-button>
+    <!-- <button mat-icon-button>
       <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+    </button> -->
+    <button class="app-menu" mdc-fab mini (click)="drawer.open = !drawer.open">
+      <mdc-icon>menu</mdc-icon>
     </button>
-    <h1>Northwind database (extended)</h1>
+    <h1>Northwind Extended</h1>
     <span class="toolbar-spacer"></span>
     <div>
       <app-nav></app-nav>
@@ -11,7 +14,7 @@
   </mat-toolbar-row>
 </mat-toolbar>
 
-<mat-sidenav-container>
+<!-- <mat-sidenav-container>
   <mat-sidenav #sidenav opened position="start">
     <mat-nav-list *ngIf="loggedIn()" >
       <a mat-list-item routerLinkActive="active" [routerLink]="['/home']" (click)="sidenav.toggle()"><mat-icon>home</mat-icon> <span class="nav-caption">Home</span></a>
@@ -23,9 +26,50 @@
           (click)="sidenav.toggle()"><mat-icon>admin_panel_settings</mat-icon> <span class="nav-caption">Admin</span></a>
     </mat-nav-list>
   </mat-sidenav>
+
   <mat-sidenav-content>
     <div style="height: 88vh;">
       <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>
-</mat-sidenav-container>
+</mat-sidenav-container> -->
+
+<div class="drawer-app-content">
+  <mdc-drawer drawer="dismissible" #drawer>
+    <!-- <mdc-drawer-header title="Drawer Title"></mdc-drawer-header> -->
+    <mdc-drawer-content>
+      <mdc-list>
+        <div>
+          <a routerLinkActive="active" [routerLink]="['/home']" (click)="drawer.open = !drawer.open">
+            <mdc-list-item>
+              <mdc-icon mdcListItemGraphic>home</mdc-icon><span class="nav-caption">Home</span>
+            </mdc-list-item>
+          </a>
+        </div>
+        <div *ngIf="loggedIn()">
+          <a routerLinkActive="active" [routerLink]="['/orders']" (click)="drawer.open = !drawer.open">
+            <mdc-list-item>
+              <mdc-icon mdcListItemGraphic>view_list</mdc-icon><span class="nav-caption">Orders</span>
+            </mdc-list-item>
+          </a>
+          <a routerLinkActive="active" [routerLink]="['/employee']" (click)="drawer.open = !drawer.open">
+            <mdc-list-item>
+              <mdc-icon mdcListItemGraphic>account_box</mdc-icon><span class="nav-caption">Employees</span>
+            </mdc-list-item>
+          </a>
+          <a *appHasRole="['Admin']" routerLinkActive="active" [routerLink]="['/admin']"
+            (click)="drawer.open = !drawer.open">
+            <mdc-list-item>
+              <mdc-icon mdcListItemGraphic>admin_panel_settings</mdc-icon><span class="nav-caption">Admin Panel</span>
+            </mdc-list-item>
+          </a>
+        </div>
+      </mdc-list>
+    </mdc-drawer-content>
+  </mdc-drawer>
+  <div mdcDrawerAppContent>
+    <div style="height: 88vh;">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

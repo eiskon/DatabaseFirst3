@@ -22,10 +22,15 @@
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "src/custom-theme.scss",
-              "src/styles.css",
+              "src/styles.scss",
               "node_modules/materialize-css/dist/css/materialize.min.css",
               "node_modules/@mdi/font/css/materialdesignicons.min.css"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules/"
+              ]
+            },
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/materialize-css/dist/js/materialize.min.js"

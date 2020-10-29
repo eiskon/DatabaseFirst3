@@ -3,7 +3,7 @@
     <div fxLayout="row wrap" fxFlexFill fxLayoutAlign="center center" fxLayoutGap="20px grid">
       <mat-card-title>Admin Panel</mat-card-title>
     </div>
-    <mat-tab-group animationDuration="800ms" mat-align-tabs="center">
+     <mat-tab-group animationDuration="800ms" mat-align-tabs="center">
       <mat-tab label="User Management">
         <app-user-management></app-user-management>
       </mat-tab>
@@ -11,5 +11,14 @@
         <app-employee-management></app-employee-management>
       </mat-tab>
     </mat-tab-group>
+    <!-- <mdc-tab-bar [activeTabIndex]="-1">
+      <mdc-tab-scroller>
+        <mdc-tab>
+          <mdc-icon mdcTabIcon>account_box</mdc-icon>
+          <mdc-tab-label>User Management</mdc-tab-label>
+          <app-user-management></app-user-management>
+        </mdc-tab>
+      </mdc-tab-scroller>
+    </mdc-tab-bar> -->
   </mat-card>
 </div>

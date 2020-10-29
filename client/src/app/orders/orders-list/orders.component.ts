@@ -7,9 +7,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { Order } from 'src/app/_models/order';
 import { MatDialog, MatDialogConfig } from '@angular/material';
-import { OrderEditDialogComponent } from '../order-edit-dialog/order-edit-dialog.component';
-import { EmployeeDetailsDialogComponent } from 'src/app/employee/employee-details-dialog/employee-details-dialog.component';
-import { DataShareService } from 'src/app/_services/data-share.service';
+// import { OrderEditDialogComponent } from '../order-edit-dialog/order-edit-dialog.component';
+import { EmployeeDetailsDialogComponent } from '../../employee/employee-details-dialog/employee-details-dialog.component';
+// import { DataShareService } from 'src/app/_services/data-share.service';
 import { Pagination } from 'src/app/_models/pagination';
 import { PaginatedResult } from 'src/app/_models/paginatedResult';
 import { AlertifyService } from 'src/app/_services/alertify.service';
@@ -50,8 +50,7 @@ export class OrdersComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute,
               public dialog: MatDialog,
-              private alertify: AlertifyService,
-              private dataShareService: DataShareService) { }
+              private alertify: AlertifyService) { }
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -82,7 +81,6 @@ export class OrdersComponent implements OnInit {
   loadOrders() {
     this.ordersService.getOrders(this.pagination.currentPage, this.pagination.itemsPerPage)
       .subscribe((res: PaginatedResult<Order[]>) => {
-        console.log(res.result);
         this.dataSource = new MatTableDataSource<Order>(res.result);
         this.dataSource.sort = this.sort;
         this.pagination = res.pagination;
@@ -118,21 +116,21 @@ export class OrdersComponent implements OnInit {
   // @ Dialog
   // -----------------------------------------------------------------------------------------------------
 
-  openDialog(id: number) {
-    const dialogConfig = new MatDialogConfig();
+  // openDialog(id: number) {
+  //   const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.disableClose = false;
-    dialogConfig.autoFocus = true;
-    const dialogRef = this.dialog.open(OrderEditDialogComponent, {
-      width: '1000px',
-      disableClose: false,
-      position: { top: '1%' },
-      maxHeight: '96vh',
-      panelClass: ['mat-dialog-overflow', 'dialog-0-p']
-    });
+  //   dialogConfig.disableClose = false;
+  //   dialogConfig.autoFocus = true;
+  //   const dialogRef = this.dialog.open(OrderEditDialogComponent, {
+  //     width: '1000px',
+  //     disableClose: false,
+  //     position: { top: '1%' },
+  //     maxHeight: '96vh',
+  //     panelClass: ['mat-dialog-overflow', 'dialog-0-p']
+  //   });
 
-    dialogRef.componentInstance.orderId = id;
-  }
+  //   dialogRef.componentInstance.orderId = id;
+  // }
 
   openDialogEmployeeDetails(id: number) {
     const dialogConfig = new MatDialogConfig();

@@ -10,8 +10,12 @@ export class AdminService {
 
 constructor(private http: HttpClient) {}
 
-getserWithRoles() {
+getUsersWithRoles() {
   return this.http.get(this.baseUrl + 'admin/userWithRoles');
+}
+
+getAvailableRoles() {
+  return this.http.get(this.baseUrl + 'admin/availableRoles');
 }
 
 }

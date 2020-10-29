@@ -6,20 +6,9 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import {
-   MatCardModule, MatIconModule, MatToolbarModule, MatButtonModule, MatFormFieldModule,
-   MatInputModule, MatTableModule, MatPaginatorModule, MatSelect, MatOption,
-   MatSelectModule, MatGridListModule, MatDialogModule, MatDialogContent, MatSortModule, MatDatepickerModule, MatNativeDateModule
-} from '@angular/material';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { NavComponent } from './nav/nav.component';
-import { LayoutModule } from '@angular/cdk/layout';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material/list';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './_services/auth.service';
-import { AdminService } from './_services/admin.service';
 import { OrdersService } from './_services/orders.service';
 import { CoreModule } from './_core/core.module';
 import { AdminModule } from './admin/admin.module';
@@ -35,6 +24,7 @@ import { EmployeeEditDialogComponent } from './employee/employee-edit-dialog/emp
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { OrderListResolver } from './_resolvers/order-list.resolver';
 import { HasRoleDirective } from './_core/_derectives/hasRole.directive';
+import { MaterialModule } from './material.module';
 
 export function getToken() {
    return localStorage.getItem('token');
@@ -49,6 +39,7 @@ export function getToken() {
       HasRoleDirective
    ],
    imports: [
+      MaterialModule,
       BrowserModule,
       CoreModule,
       AdminModule,
@@ -59,25 +50,7 @@ export function getToken() {
       AppRoutingModule,
       ReactiveFormsModule,
       BrowserAnimationsModule,
-      MatCardModule,
-      MatIconModule,
-      MatTableModule,
-      MatToolbarModule,
-      MatButtonModule,
-      MatFormFieldModule,
-      MatDatepickerModule,
-      MatNativeDateModule,
-      MatInputModule,
-      FlexLayoutModule,
-      MatPaginatorModule,
-      LayoutModule,
-      MatSidenavModule,
-      MatListModule,
-      FormsModule,
-      MatSelectModule,
-      MatGridListModule,
-      MatDialogModule,
-      MatSortModule,
+   
       JwtModule.forRoot({
          config: {
             tokenGetter: getToken,
@@ -93,7 +66,6 @@ export function getToken() {
       EmployeeListResolver,
       OrderListResolver,
       PreventUnsavedChanges,
-      AdminService,
       ErrorInterceptorProvider
    ],
    bootstrap: [
